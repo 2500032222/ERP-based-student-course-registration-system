@@ -1,0 +1,103 @@
+# ---------- DATA STORAGE ----------
+students = {}
+courses = {}
+registrations = {}
+
+# ---------- STUDENT MODULE ----------
+def add_student():
+    sid = input("Enter Student ID: ")
+    name = input("Enter Student Name: ")
+
+    students[sid] = name
+    print("Student added successfully!")
+
+def view_students():
+    print("\n--- Student List ---")
+    for sid, name in students.items():
+        print(f"{sid} - {name}")
+
+
+# ---------- COURSE MODULE ----------
+def add_course():
+    cid = input("Enter Course ID: ")
+    cname = input("Enter Course Name: ")
+
+    courses[cid] = cname
+    print("Course added successfully!")
+
+def view_courses():
+    print("\n--- Course List ---")
+    for cid, cname in courses.items():
+        print(f"{cid} - {cname}")
+
+
+# ---------- REGISTRATION MODULE ----------
+def register_course():
+    sid = input("Enter Student ID: ")
+    cid = input("Enter Course ID: ")
+
+    if sid not in students:
+        print("Student not found!")
+        return
+
+    if cid not in courses:
+        print("Course not found!")
+        return
+
+    if sid not in registrations:
+        registrations[sid] = []
+
+    registrations[sid].append(cid)
+    print("Course registered successfully!")
+
+def view_registrations():
+    print("\n--- Registration Details ---")
+    for sid, course_list in registrations.items():
+        print(f"Student: {students[sid]}")
+        for cid in course_list:
+            print(f"  -> {courses[cid]}")
+        print()
+
+
+# ---------- MAIN MENU ----------
+def main():
+    while True:
+        print("\n===== ERP STUDENT COURSE SYSTEM =====")
+        print("1. Add Student")
+        print("2. View Students")
+        print("3. Add Course")
+        print("4. View Courses")
+        print("5. Register Course")
+        print("6. View Registrations")
+        print("7. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            add_student()
+
+        elif choice == '2':
+            view_students()
+
+        elif choice == '3':
+            add_course()
+
+        elif choice == '4':
+            view_courses()
+
+        elif choice == '5':
+            register_course()
+
+        elif choice == '6':
+            view_registrations()
+
+        elif choice == '7':
+            print("Exiting system...")
+            break
+
+        else:
+            print("Invalid choice!")
+
+
+# ---------- RUN ----------
+main()
